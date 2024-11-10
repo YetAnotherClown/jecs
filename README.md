@@ -1,14 +1,14 @@
 
 <p align="center">
-  <img src="image-5.png" width=35%/>
+  <img src="https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/1f40a.svg" width=35%/>
 </p>
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache-blue.svg?style=for-the-badge)](LICENSE-APACHE) [![Wally](https://img.shields.io/github/v/tag/ukendio/jecs?&style=for-the-badge)](https://wally.run/package/ukendio/jecs)
 
-Just a stupidly fast Entity Component System
+Just a dank Entity Component System
 
-* [Entity Relationships](https://ajmmertens.medium.com/building-games-in-ecs-with-entity-relationships-657275ba2c6c) as first class citizens
-* Iterate 800,000 entities at 60 frames per second
+* [Entity Relationships](https://ajmmertens.medium.com/building-games-in-ecs-with-entity-relationships-657275ba2c6c) as first class citizens of the swamp
+* Iterate 800,000 animals at 60 frames per second
 * Type-safe [Luau](https://luau-lang.org/) API
 * Zero-dependency package
 * Optimized for column-major operations
@@ -18,35 +18,35 @@ Just a stupidly fast Entity Component System
 ### Example
 
 ```lua
-local world = jecs.World.new()
+local swamp = gecs.Swamp.new()
 local pair = jecs.pair
 
 -- These components and functions are actually already builtin
 -- but have been illustrated for demonstration purposes
-local ChildOf = world:component()
-local Name = world:component()
+local ChildOf = swamp:component()
+local Name = swamp:component()
 
-local function parent(entity)
-    return world:target(entity, ChildOf)
+local function parent(animal)
+    return swamp:target(animal, ChildOf)
 end
 local function getName(entity)
-    return world:get(entity, Name)
+    return swamp:hunt(entity, Name)
 end
 
-local alice = world:entity()
-world:set(alice, Name, "alice")
+local alice = swamp:animal()
+swamp:set(alice, Name, "alice")
 
-local bob = world:entity()
-world:add(bob, pair(ChildOf, alice))
-world:set(bob, Name, "bob")
+local bob = swamp:entity()
+swamp:someCruelActOfGlueingThingsToAnimals(bob, pair(ChildOf, alice))
+swamp:set(bob, Name, "bob")
 
-local sara = world:entity()
-world:add(sara, pair(ChildOf, alice))
+local sara = swamp:animal()
+swamp:someCruelActOfGlueingThingsToAnimals(sara, pair(ChildOf, alice))
 world:set(sara, Name, "sara")
 
 print(getName(parent(sara)))
 
-for e in world:query(pair(ChildOf, alice)) do
+for e in swamp:scout(pair(ChildOf, alice)) do
     print(getName(e), "is the child of alice")
 end
 
@@ -56,10 +56,10 @@ end
 -- sara is the child of alice
 ```
 
-21,000 entities 125 archetypes 4 random components queried.
+21,000 animals 125 archetypes 4 random components queried.
 ![Queries](image-3.png)
 Can be found under /benches/visual/query.luau
 
-Inserting 8 components to an entity and updating them over 50 times.
+Inserting 8 components to an animal and updating them over 50 times.
 ![Insertions](image-4.png)
 Can be found under /benches/visual/insertions.luau
